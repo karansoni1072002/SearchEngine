@@ -1,11 +1,8 @@
 # HUSHH Search Engine
-------
 An ML and NLP integrated Search Engine which makes easier to do quick search and get a brief summary about your query.
 
 
 ## Getting Started
-
-### Dependencies
 
 ### Tech Stack
 * Frontend - ReactJS
@@ -17,7 +14,7 @@ An ML and NLP integrated Search Engine which makes easier to do quick search and
 
 ## Application workflow
 
-#### Search query
+### Search query
 * A user enters the search quesry in the search bar in frontend
 * This data is sent to backend server using `fetch` API by `POST` method
 
