@@ -1,4 +1,4 @@
-# HUSHH Search Engine
+# Search Engine
 An ML and NLP integrated Search Engine which makes easier to do quick search and get a brief summary about your query.
 
 
