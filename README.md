@@ -15,12 +15,12 @@ An ML and NLP integrated Search Engine which makes easier to do quick search and
 ## Application workflow
 
 ### Search query
-* A user enters the search quesry in the search bar in frontend
+* A user enters the search query in the search bar in frontend
 * This data is sent to backend server using `fetch` API by `POST` method
 
 ### Getting Search Results in backend
 * The query entered by user is received in the backend
-* Using Google API, the search results are requested from google for the query using Axios
+* Using `Google API`, the search results are requested from google for the query using `Axios`
 * The search results received are saved
 * The links of first 5 results are saved in a separate array for next processes
 
