@@ -19,23 +19,36 @@ module.exports.searchResults = async (req, res) => {
                     }
                 }
             }
+            console.log('Got links');
         })
-        .catch((err) => res.status(401).send({ 'message': 'Error in fetching data' }))
+        .catch((err) => res.send({ 'message': 'Error in fetching data' }))
 
-    let concatenatedText = ''
+    let individualSummaries = [];
 
+    await Promise.all(linksArray.map(async (url) => {
+        try {
+            const scrapedData = await ScrapePage(url)
+            const response = await RequestSummary(scrapedData)
+            const individualSummary = response.summary_text;
+            console.log(individualSummary)
+            individualSummaries.push(individualSummary);
+            console.log(`Got individual summary for ${url}`);
+        } catch (error) {
+            console.error(`Error in processing ${url}: ${error}`);
+        }
 
-    await Promise.all(linksArray.map(url => ScrapePage(url)))
-        .then((results) => {
-            concatenatedText = results.join(' ');
-        })
-        .catch((err) => {
-            res.status(402).send({ 'message': 'Error in scraping data' })
-        });
+    }))
+    console.log('GOt scraped data');
+    const concatenatedText = individualSummaries.join(' ');
+    console.log('Got individual summaries');
+    console.log('Got scraped data');
     try {
         const summary = await RequestSummary(concatenatedText)
-        res.status(200).send({ summary, 'results': results })
+        console.log('Got summary');
+        console.log(summary)
+        res.send({ summary, 'results': results })
     } catch (error) {
-        res.status(403).send({ 'message': 'Error in generating summary' })
+        console.log(error)
+        res.send({ 'message': 'Error in generating summary' })
     }
 }
